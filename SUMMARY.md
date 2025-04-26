@@ -1,13 +1,13 @@
 # Table of contents
 
-- [Welcome](README.md)
+- [Bienvenue](README.md)
 
-## Getting Started
+## Démarrage rapide
 
 - [Quickstart](getting-started/quickstart.md)
 
 ## API
 
-- [Overview](basics/editor.md)
-- [Managing Conversation Context in the API](basics/managing-conversation-context.md)
-- [JavaScript/Node.js Examples](javascript/nodejs-examples.md)
+- [Vue d'ensemble](basics/editor.md)
+- [Gestion du contexte de la conversation dans l'API](basics/managing-conversation-context.md)
+- [Exemples JavaScript/Node.js](javascript/nodejs-examples.md)
