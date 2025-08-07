@@ -22,6 +22,6 @@ layout:
 Bienvenue sur la documentation de l'API d'Ikalas en français.
 Vous trouverez ici toutes les informations nécessaires pour utiliser l'API d'Ikalas.
 
-### Jump right in
+### Commencer rapidement
 
-<table data-view="cards"><thead><tr><th></th><th></th><th data-hidden data-card-cover data-type="files"></th><th data-hidden></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><strong>Pour commencer</strong></td><td>Create your first site</td><td></td><td></td><td><a href="getting-started/quickstart.md">quickstart.md</a></td></tr><tr><td><strong>Basics</strong></td><td>Learn the basics of GitBook</td><td></td><td></td><td><a href="broken-reference">Broken link</a></td></tr><tr><td><strong>Publish your docs</strong></td><td>Share your docs online</td><td></td><td></td><td><a href="broken-reference">Broken link</a></td></tr></tbody></table>
+<table data-view="cards"><thead><tr><th></th><th></th><th data-hidden data-card-cover data-type="files"></th><th data-hidden></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><strong>Pour commencer</strong></td><td>Créez votre premier projet</td><td></td><td></td><td><a href="getting-started/quickstart.md">quickstart.md</a></td></tr><tr><td><strong>Fondamentaux</strong></td><td>Apprenez les bases de l'API</td><td></td><td></td><td><a href="basics/editor.md">editor.md</a></td></tr><tr><td><strong>Exemples JavaScript</strong></td><td>Découvrez des exemples pratiques</td><td></td><td></td><td><a href="javascript/nodejs-examples.md">nodejs-examples.md</a></td></tr></tbody></table>

@@ -2,7 +2,7 @@
 description: Démarrez rapidement avec l'API d'Ikalas
 ---
 
-# Quickstart
+# Démarrage rapide
 
 Ce guide vous aidera à démarrer rapidement avec l'API d'Ikalas.
 

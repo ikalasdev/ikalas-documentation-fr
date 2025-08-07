@@ -4,7 +4,7 @@
 
 ## Démarrage rapide
 
-- [Quickstart](getting-started/quickstart.md)
+- [Démarrage rapide](getting-started/quickstart.md)
 
 ## API
 
