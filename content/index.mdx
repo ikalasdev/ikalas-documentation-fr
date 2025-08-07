@@ -1,3 +1,7 @@
+import { Tabs } from "nextra/components";
+
+import { Steps } from "nextra/components";
+
 # Pour commencer
 
 Bienvenue sur la documentation officielle de l'API d'Ikalas en français.
@@ -6,18 +10,51 @@ Vous trouverez ici toutes les informations nécessaires pour utiliser l'API d'Ik
 Ikalas propose une API unifiée qui vous donne accès à des centaines de modèles d'IA via un seul point d'entrée.
 Voici comment commencer.
 
-1. Créez votre compte sur Ikalas
-2. Créez votre clé d'API
-3. Prenez connaissance de cette documentation pour savoir comment utiliser l'API
-4. Commencez à utiliser l'API
+<Steps>
 
-un exemple simple pour commencer
+#### Créez votre compte sur Ikalas
 
-````
-curl -d '{"system": "You are a useful assistant","prompt": "","models": "meta-llama/llama-3.3-70b-instruct:free","response_format": "default"}'\
-  -X POST "https://ikalas.com/api/v1/api-llm-ia"\
-  -H "accept: application/json"\
-  -H "apikey: EICZM-DNP0-7NSN-YFQF"\
-  -H "content-type: application/json"
+Aller sur [https://ikalas.com](https://ikalas.com) et créer votre compte.
+
+#### Créez votre clé d'API
+
+Aller sur [https://dashboard.ikalas.com/\_api](https://dashboard.ikalas.com/_api) et créer votre clé d'API.
+
+#### Prenez connaissance de cette documentation pour savoir comment utiliser l'API
+
+#### Commencez à utiliser l'API
+
+</Steps>
+
+## Un exemple simple pour commencer
+
+```js
+const axios = require("axios");
+let data = JSON.stringify({
+  system: "You are a useful assistant",
+  prompt: "Biographie de Napoleon Bonaparte en 100 mots",
+  models: "meta-llama/llama-3.3-70b-instruct:free",
+  response_format: "default",
+});
+
+let config = {
+  method: "post",
+  maxBodyLength: Infinity,
+  url: "https://ikalas.com/api/v1/api-llm-ia",
+  headers: {
+    accept: "application/json",
+    apikey: "VOTRE-CLE_API_ICI",
+    "content-type": "application/json",
+  },
+  data: data,
+};
+
+axios
+  .request(config)
+  .then((response) => {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 ```
-````
