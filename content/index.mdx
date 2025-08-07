@@ -29,14 +29,72 @@ Aller sur [https://dashboard.ikalas.com/\_api](https://dashboard.ikalas.com/_api
 ## Un exemple simple pour commencer
 
 ```js
+// Import de la bibliothèque axios pour effectuer des requêtes HTTP
 const axios = require("axios");
+
+// Préparation des données à envoyer à l'API
+let data = JSON.stringify({
+  system: "You are a useful assistant", // Message système qui définit le comportement de l'IA
+  prompt: "Biographie de Napoleon Bonaparte en 100 mots", // La question ou demande à l'IA
+  models: "meta-llama/llama-3.3-70b-instruct:free", // Le modèle d'IA à utiliser
+  response_format: "default", // Format de réponse souhaité
+});
+
+// Configuration de la requête HTTP
+let config = {
+  method: "post", // Méthode HTTP : POST pour envoyer des données
+  maxBodyLength: Infinity, // Pas de limite sur la taille du corps de la requête
+  url: "https://ikalas.com/api/v1/api-llm-ia", // URL de l'endpoint de l'API Ikalas
+  headers: {
+    accept: "application/json", // Type de réponse accepté
+    apikey: "VOTRE-CLE_API_ICI", // Votre clé d'API (à remplacer par votre vraie clé)
+    "content-type": "application/json", // Type de contenu envoyé
+  },
+  data: data, // Les données à envoyer (définies plus haut)
+};
+
+// Exécution de la requête avec gestion des réponses
+axios
+  .request(config)
+  .then((response) => {
+    // En cas de succès, afficher la réponse de l'API
+    console.log(JSON.stringify(response.data));
+  })
+  .catch((error) => {
+    // En cas d'erreur, afficher les détails de l'erreur
+    console.log(error);
+  });
+```
+
+### Explications détaillées du code
+
+**1. Import d'axios :**
+
+```js
+const axios = require("axios");
+```
+
+Axios est une bibliothèque JavaScript populaire pour effectuer des requêtes HTTP. Elle simplifie l'envoi de requêtes vers des APIs.
+
+**2. Préparation des données :**
+
+```js
 let data = JSON.stringify({
   system: "You are a useful assistant",
   prompt: "Biographie de Napoleon Bonaparte en 100 mots",
   models: "meta-llama/llama-3.3-70b-instruct:free",
   response_format: "default",
 });
+```
 
+- `system` : Définit le rôle ou le comportement de l'IA
+- `prompt` : Votre question ou demande spécifique
+- `models` : Le modèle d'IA à utiliser (ici Llama 3.3 70B gratuit)
+- `response_format` : Format de la réponse souhaitée
+
+**3. Configuration de la requête :**
+
+```js
 let config = {
   method: "post",
   maxBodyLength: Infinity,
@@ -48,13 +106,15 @@ let config = {
   },
   data: data,
 };
-
-axios
-  .request(config)
-  .then((response) => {
-    console.log(JSON.stringify(response.data));
-  })
-  .catch((error) => {
-    console.log(error);
-  });
 ```
+
+- `method: "post"` : Utilise la méthode POST pour envoyer des données
+- `url` : L'endpoint de l'API Ikalas
+- `headers` : Métadonnées de la requête incluant votre clé d'API
+- `data` : Les données à envoyer à l'API
+
+### Remarques importantes
+
+- **Remplacez `"VOTRE-CLE_API_ICI"`** par votre vraie clé d'API obtenue sur le dashboard
+- Le modèle `meta-llama/llama-3.3-70b-instruct:free` est gratuit, utilisez n'importe quel modèle d'IA disponible sur Ikalas.
+- Vous pouvez changer le `prompt` pour poser vos propres questions
