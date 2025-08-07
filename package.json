@@ -18,5 +18,12 @@
   "bugs": {
     "url": "https://github.com/ikalasdev/ikalas-documentation-fr/issues"
   },
-  "homepage": "https://github.com/ikalasdev/ikalas-documentation-fr#readme"
+  "homepage": "https://github.com/ikalasdev/ikalas-documentation-fr#readme",
+  "dependencies": {
+    "next": "^15.4.6",
+    "nextra": "^4.3.0",
+    "nextra-theme-docs": "^4.3.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  }
 }
