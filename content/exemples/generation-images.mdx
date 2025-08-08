@@ -1,0 +1,102 @@
+import { Tabs } from "nextra/components";
+import { Steps } from "nextra/components";
+
+# Exemple : Génération d'images
+
+Cet exemple vous montre comment utiliser l'API de génération d'images d'Ikalas.
+
+## Utilisation de l'API de génération d'images
+
+Voici comment utiliser l'API de génération d'images :
+
+### Exemple de code pour générer une image
+
+```js
+const axios = require("axios");
+
+// Configuration de la requête pour la génération d'images
+let data = JSON.stringify({
+  prompt: "Napoléon regardant la bataille d'Austerlitz",
+});
+
+let config = {
+  method: "post",
+  maxBodyLength: Infinity,
+  url: "https://ikalas.com/api/v1/generer-des-images-avec-ia",
+  headers: {
+    accept: "application/json",
+    apikey: "VOTRE_CLE_API_ICI", // Remplacez par votre vraie clé d'API
+    "content-type": "application/json",
+  },
+  data: data,
+};
+
+// Exécution de la requête
+axios
+  .request(config)
+  .then((response) => {
+    console.log("Image générée avec succès !");
+    console.log("URL de l'image :", response.data.result[0].outputFileUrl);
+    console.log("ID de l'image :", response.data.result[0].outputFileId);
+    console.log("Crédits restants :", response.data.creditsUser);
+  })
+  .catch((error) => {
+    console.log(
+      "Erreur lors de la génération :",
+      error.response?.data || error.message
+    );
+  });
+```
+
+### Paramètres de l'API de génération d'images
+
+| Paramètre | Type   | Description                      | Requis |
+| --------- | ------ | -------------------------------- | ------ |
+| `prompt`  | string | Description de l'image à générer | ✅     |
+
+### Structure de la réponse
+
+La réponse de l'API contient les informations suivantes :
+
+```json
+{
+  "success": true,
+  "id": "nod-cea660a2fe",
+  "date": "2025-08-08T19:15:06+00:00",
+  "typeOutput": "file",
+  "result": [
+    {
+      "outputFileId": "8c7cc75e-801e-431a-b3a7-e627ee88d186",
+      "outputFileName": "b7362c090d.png",
+      "outputFileExtension": "png",
+      "outputFileHasPreview": true,
+      "outputFileIsImage": true,
+      "outputFileUrl": "https://storage.googleapis.com/ikalas-public/8cbe1269-2072-4111-8a10-1e00ac511c64.png"
+    }
+  ],
+  "creditsUser": 9676,
+  "uuidLogFunction": "911bff33-a48d-40fa-ae77-e818f449d664",
+  "ika_conversationId": "180a54ff-cea0-4734-9d86-7406af59075c"
+}
+```
+
+**Champs importants :**
+
+- `result[0].outputFileUrl` : URL directe vers l'image générée
+- `result[0].outputFileId` : Identifiant unique de l'image
+- `creditsUser` : Nombre de crédits restants sur votre compte
+
+### Exemple d'image générée
+
+Voici un exemple d'image générée avec le prompt "Napoléon regardant la bataille d'Austerlitz" :
+
+![Image générée par l'IA](https://storage.googleapis.com/ikalas-public/8cbe1269-2072-4111-8a10-1e00ac511c64.png)
+
+_Image générée par l'API de génération d'images d'Ikalas_
+
+## Support
+
+Si vous rencontrez des difficultés :
+
+1. **Documentation complète** : Consultez notre [documentation API](https://fr.docs.ikalas.com)
+2. **Support technique** : Contactez-nous via [contact@ikalas.com](mailto:contact@ikalas.com)
