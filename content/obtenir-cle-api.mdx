@@ -1,0 +1,140 @@
+import { Tabs } from "nextra/components";
+import { Steps } from "nextra/components";
+
+# Comment obtenir votre clé d'API et utiliser la génération d'images
+
+Bienvenue ! Ce guide vous explique étape par étape comment obtenir votre clé d'API et commencer à utiliser l'API de génération d'images d'Ikalas.
+
+## Obtention de votre clé d'API
+
+<Steps>
+
+### 1. Créez votre compte sur Ikalas
+
+Rendez-vous sur [https://ikalas.com](https://ikalas.com) et créez votre compte utilisateur.
+
+### 2. Accédez au dashboard
+
+Une fois connecté, allez sur [https://dashboard.ikalas.com](https://dashboard.ikalas.com)
+
+### 3. Naviguez vers la section API
+
+Dans le dashboard, cliquez sur l'onglet **"API"** ou allez directement sur [https://dashboard.ikalas.com/\_api](https://dashboard.ikalas.com/_api)
+
+### 4. Créez votre clé d'API
+
+Dans la section API, vous verrez un bouton **"Créer une nouvelle clé"** ou **"Generate API Key"**. Cliquez dessus pour générer votre clé d'API.
+
+### 5. Copiez et sauvegardez votre clé
+
+Votre clé d'API s'affichera sous un format similaire à : `ik_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`
+
+⚠️ **Important** : Sauvegardez cette clé dans un endroit sûr. Elle ne sera plus visible après avoir quitté la page.
+
+</Steps>
+
+## Utilisation de l'API de génération d'images
+
+Une fois votre clé d'API obtenue, voici comment utiliser l'API de génération d'images :
+
+### Exemple de code pour générer une image
+
+```js
+const axios = require("axios");
+
+// Configuration de la requête pour la génération d'images
+let data = JSON.stringify({
+  prompt: "Un chat noir assis sur un fauteuil rouge dans un salon moderne",
+  style: "realistic", // Styles disponibles : realistic, artistic, cartoon, etc.
+  outputDir: "./generated_images", // Dossier où sauvegarder l'image
+});
+
+let config = {
+  method: "post",
+  maxBodyLength: Infinity,
+  url: "https://ikalas.com/api/v1/generate-ai-image", // Endpoint pour la génération d'images
+  headers: {
+    accept: "application/json",
+    apikey: "VOTRE-CLE_API_ICI", // Remplacez par votre vraie clé d'API
+    "content-type": "application/json",
+  },
+  data: data,
+};
+
+// Exécution de la requête
+axios
+  .request(config)
+  .then((response) => {
+    console.log("Image générée avec succès !");
+    console.log("Chemin de l'image :", response.data.data[0].outputFilePath);
+  })
+  .catch((error) => {
+    console.log(
+      "Erreur lors de la génération :",
+      error.response?.data || error.message
+    );
+  });
+```
+
+### Paramètres de l'API de génération d'images
+
+| Paramètre   | Type   | Description                                           | Requis |
+| ----------- | ------ | ----------------------------------------------------- | ------ |
+| `prompt`    | string | Description de l'image à générer                      | ✅     |
+| `style`     | string | Style artistique (realistic, artistic, cartoon, etc.) | ❌     |
+| `outputDir` | string | Dossier de sauvegarde de l'image                      | ✅     |
+
+### Styles disponibles
+
+- **realistic** : Style photoréaliste
+- **artistic** : Style artistique
+- **cartoon** : Style dessin animé
+- **anime** : Style manga/anime
+- **oil-painting** : Style peinture à l'huile
+- **watercolor** : Style aquarelle
+
+## Plans et limitations
+
+### Plan gratuit
+
+- 5 images par mois
+- Accès aux modèles de base
+- Résolution standard
+
+### Plans payants
+
+- **Start Plan** : 100 images par mois
+- **Standard Plan** : 175 images par mois
+- **Premium Plan** : 250 images par mois
+
+## Dépannage
+
+### Problème : "API key not found"
+
+**Solution** : Vérifiez que vous avez bien copié votre clé d'API et qu'elle est correctement incluse dans l'en-tête `apikey`.
+
+### Problème : "Missing required parameters"
+
+**Solution** : Assurez-vous que les paramètres `prompt` et `outputDir` sont bien fournis.
+
+### Problème : "Premium Feature"
+
+**Solution** : La génération d'images est une fonctionnalité premium. Mettez à niveau votre plan pour y accéder.
+
+## Support
+
+Si vous rencontrez des difficultés :
+
+1. **Documentation complète** : Consultez notre [documentation API](https://docs.ikalas.com)
+2. **Support technique** : Contactez-nous via [support@ikalas.com](mailto:support@ikalas.com)
+3. **Chat en direct** : Disponible sur [ikalas.com](https://ikalas.com)
+
+## Prochaines étapes
+
+Maintenant que vous avez votre clé d'API, vous pouvez :
+
+- Explorer d'autres endpoints de l'API Ikalas
+- Intégrer la génération d'images dans vos applications
+- Découvrir nos autres fonctionnalités IA (chat, analyse de documents, etc.)
+
+Bonne utilisation de l'API Ikalas ! 🚀
