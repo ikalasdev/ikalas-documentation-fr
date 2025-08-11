@@ -1,31 +1,19 @@
----
-description: Vue d'ensemble de l'API d'Ikalas
----
+# Pense bête
 
-# Vue d'ensemble
+Quelques informations utilises à savoir pour s'y retrouver dans l'API.
 
-Cette section présente une vue d'ensemble de l'API d'Ikalas, ses capacités et comment l'intégrer dans vos applications.
+| Point de terminaison API               | Description                     |
+| -------------------------------------- | ------------------------------- |
+| `https://ikalas.com/api/v1`            | Url de base pour les appels API |
+| `https://ikalas.com/api/v1/api-llm-ia` | Url pour les appels API IA      |
 
-## Points de terminaison principaux
-
-L'API d'Ikalas est accessible via les points de terminaison suivants :
-
-| Point de terminaison   | Description                             |
-| ---------------------- | --------------------------------------- |
-| `/api/v1/conversation` | Créer et gérer des conversations        |
-| `/api/v1/completion`   | Générer des compléments de texte        |
-| `/api/v1/embedding`    | Obtenir des embeddings pour vos données |
-| `/api/v1/moderation`   | Modérer des contenus                    |
+| Urls                                | Description                            |
+| ----------------------------------- | -------------------------------------- |
+| `https://dashboard.ikalas.com/_api` | Pour créer et retrouver vos clés d'API |
 
 ## Authentification
 
-Toutes les requêtes à l'API doivent être authentifiées à l'aide d'une clé API. Vous pouvez obtenir votre clé API dans les paramètres de votre compte Ikalas.
-
-Exemple d'en-tête d'authentification :
-
-```
-Authorization: Bearer VOTRE_CLE_API
-```
+Incluez votre clé API dans toutes les requêtes. Votre clé d'API est ici : [https://dashboard.ikalas.com/\_api](https://dashboard.ikalas.com/_api)
 
 ## Formats de requête et de réponse
 
@@ -35,12 +23,10 @@ Exemple de requête :
 
 ```json
 {
-  "messages": [
-    { "role": "system", "content": "Vous êtes un assistant utile." },
-    { "role": "user", "content": "Quel temps fait-il aujourd'hui?" }
-  ],
-  "modele": "ikalas-v1",
-  "temperature": 0.7
+  "system": "You are a useful assistant",
+  "prompt": "Date de naissance Napoléon",
+  "models": "meta-llama/llama-3.3-70b-instruct:free",
+  "response_format": "default"
 }
 ```
 
@@ -48,35 +34,30 @@ Exemple de réponse :
 
 ```json
 {
-  "id": "conv_123456789",
-  "object": "conversation.completion",
-  "created": 1698765432,
-  "model": "ikalas-v1",
-  "choices": [
-    {
-      "index": 0,
-      "message": {
-        "role": "assistant",
-        "content": "Je ne peux pas connaître la météo en temps réel sans accéder à des données actuelles. Veuillez consulter un service météo ou regarder dehors pour connaître le temps qu'il fait aujourd'hui."
-      },
-      "finish_reason": "stop"
-    }
-  ],
-  "usage": {
-    "prompt_tokens": 24,
-    "completion_tokens": 30,
-    "total_tokens": 54
-  }
+  "success": true,
+  "id": "pos-af29738750",
+  "date": "2025-08-07T16:57:00+00:00",
+  "typeOutput": "json",
+  "result": {
+    "model": "meta-llama/llama-3.3-70b-instruct:free",
+    "choices": [
+      {
+        "logprobs": null,
+        "finish_reason": "stop",
+        "native_finish_reason": "stop",
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "La date de naissance de Napoléon Bonaparte est le 15 août 1769. Il est né à Ajaccio, en Corse.",
+          "refusal": null,
+          "reasoning": null
+        }
+      }
+    ],
+    "credits_spent": null
+  },
+  "creditsUser": 9688,
+  "uuidLogFunction": "758691cf-4449-4d87-9729-45de94660f49",
+  "ika_conversationId": "e35b1024-05b4-49d2-8e83-9590e2f7b309"
 }
 ```
-
-## Limites de l'API
-
-- **Taux de requêtes** : 60 requêtes par minute pour les comptes standard
-- **Taille maximale des messages** : 16 000 tokens par requête
-- **Longueur de contexte** : Jusqu'à 32 000 tokens selon le modèle
-
-## Sections connexes
-
-- [Gestion du contexte de la conversation](managing-conversation-context.md)
-- [Exemples JavaScript/Node.js](../javascript/nodejs-examples.md)
