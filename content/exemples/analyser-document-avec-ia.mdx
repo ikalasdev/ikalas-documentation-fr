@@ -1,0 +1,134 @@
+import { Tabs } from "nextra/components";
+import { Steps } from "nextra/components";
+
+# Exemple : Analyse de documents avec l'IA
+
+Cet exemple vous montre comment utiliser l'API d'analyse de documents d'Ikalas pour extraire et analyser le contenu de vos documents PDF.
+
+## Fonctionnalités
+
+- **Analyse de documents PDF** : Extraction et résumé automatique
+- **Prompts personnalisables** : Posez des questions spécifiques sur vos documents
+- **Support multilingue** : Analyse en français, anglais et autres langues
+- **Traitement sécurisé** : Vos documents sont traités de manière sécurisée
+
+## Prérequis
+
+- Une clé API Ikalas valide
+- Node.js installé sur votre machine
+- Un document PDF à analyser
+
+## Installation des dépendances
+
+```bash
+npm install axios form-data fs
+```
+
+## Exemple de code
+
+<Tabs items={['JavaScript', 'cURL']}>
+  <Tabs.Tab>
+    ```javascript
+    const axios = require('axios');
+    const FormData = require('form-data');
+    const fs = require('fs');
+
+    let data = new FormData();
+    data.append('file', fs.createReadStream('/Users/ikalas/samples/test-medical-report.pdf'));
+    data.append('prompt', 'resume');
+
+    let config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: 'https://ikalas.com/api/v1/ask-document',
+      headers: {
+        'accept': 'application/json',
+        'apikey': 'VOTRE_CLE_API_ICI',
+        ...data.getHeaders()
+      },
+      data : data
+    };
+
+    axios.request(config)
+    .then((response) => {
+      console.log(JSON.stringify(response.data));
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+    ```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```bash
+    curl -X POST "https://ikalas.com/api/v1/ask-document" \
+      -H "accept: application/json" \
+      -H "apikey: VOTRE_CLE_API_ICI" \
+      -F "file=@/Users/ikalas/samples/test-medical-report.pdf" \
+      -F "prompt=resume"
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## Paramètres de l'API
+
+| Paramètre | Type   | Description                               | Obligatoire |
+| --------- | ------ | ----------------------------------------- | ----------- |
+| `file`    | File   | Le document PDF à analyser                | ✅          |
+| `prompt`  | String | La question ou instruction pour l'analyse | ✅          |
+| `apikey`  | String | Votre clé API Ikalas                      | ✅          |
+
+## Exemples de prompts
+
+Voici quelques exemples de prompts que vous pouvez utiliser :
+
+- `"resume"` - Génère un résumé du document
+- `"Quels sont les points clés ?"` - Extrait les points importants
+- `"Analyse les risques mentionnés"` - Identifie les risques dans le document
+- `"Traduis en anglais"` - Traduit le contenu
+- `"Extrais les dates importantes"` - Identifie les dates clés
+
+## Réponse de l'API
+
+```json
+{
+  "success": true,
+  "id": "wor-700b29048f",
+  "date": "2025-08-11T10:11:58+00:00",
+  "typeOutput": "markup",
+  "result": "VOTRE RÉSULTAT S'AFFICHE ICI",
+  "__meta": {},
+  "creditsUser": 23,
+  "uuidLogFunction": "b0f066e6-aa5d-4a5e-9c6f-e0e53ec133fa",
+  "ika_conversationId": "98ddc758-70e6-48bf-9310-c30a9231d88e"
+}
+```
+
+## Gestion des erreurs
+
+Voici les étapes pour résoudre les problèmes courants :
+
+### 1. Vérifiez votre clé API
+
+Assurez-vous que votre clé API est valide et active dans votre compte Ikalas.
+Vous pouvez vérifier votre clé d'api dans le [dashboard](https://dashboard.ikalas.com)
+
+### 2. Vérifiez la taille du fichier
+
+Les tailles acceptées dépendent de votre abonnement. Voir les détails dans la page [pricing](https://ikalas.com/app/pricing)
+
+## Cas d'usage courants
+
+- **Analyse de rapports médicaux** : Extraction de diagnostics et recommandations
+- **Analyse de contrats** : Identification des clauses importantes
+- **Analyse de rapports financiers** : Extraction de données financières clés
+- **Traduction de documents** : Traduction automatique du contenu
+- **Résumé de longs documents** : Génération de résumés automatiques
+
+## Support
+
+Si vous rencontrez des difficultés :
+
+1. **Documentation complète** : Consultez notre [documentation API](https://fr.docs.ikalas.com)
+2. **Support technique** : Contactez-nous via [contact@ikalas.com](mailto:contact@ikalas.com)
+3. **Forum communautaire** : Rejoignez notre [communauté Discord](https://discord.gg/yYHe7bCuw3)
