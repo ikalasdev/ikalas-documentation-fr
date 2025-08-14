@@ -1,0 +1,115 @@
+import { Callout } from "nextra/components";
+import { Tabs } from "nextra/components";
+
+# Gestion des erreurs
+
+Cette page décrit les différents types d'erreurs que vous pouvez rencontrer lors de l'utilisation de l'API Ikalas et comment les résoudre.
+
+## Structure des réponses d'erreur
+
+Toutes les réponses d'erreur de l'API Ikalas suivent une structure standardisée :
+
+```json
+{
+  "success": false,
+  "message": "Description de l'erreur",
+  "code": 400
+}
+```
+
+## Codes d'erreur HTTP
+
+### 400 - Bad Request
+**Cause :** Paramètres manquants ou invalides dans votre requête.
+
+**Exemple :**
+```json
+{
+  "success": false,
+  "message": "Parameters are missing or invalids in your request.",
+  "code": 400,
+  "parameters": ["paramètre_manquant"]
+}
+```
+
+**Solutions :**
+- Vérifiez que tous les paramètres requis sont présents
+- Assurez-vous que les types de données sont corrects
+- Consultez la documentation pour connaître les paramètres requis
+
+### 401 - Unauthorized
+**Cause :** Clé d'API manquante ou invalide.
+
+**Solution :**
+- Vérifiez que votre clé d'API est correctement incluse dans l'en-tête `apiKey`
+- Assurez-vous que votre clé d'API est valide et active
+- Vérifiez que votre compte a les permissions nécessaires
+
+### 403 - Forbidden
+**Cause :** Accès refusé ou limite de taux dépassée.
+
+**Exemples :**
+- Limite de taux dépassée
+- Permissions insuffisantes
+- Compte suspendu
+
+**Solution :**
+- Attendez avant de faire de nouvelles requêtes
+- Vérifiez votre plan d'abonnement
+- Contactez le support si le problème persiste
+
+### 404 - Not Found
+**Cause :** Ressource ou fonction non trouvée.
+
+**Solution :**
+- Vérifiez l'URL de l'endpoint
+- Assurez-vous que le nom de la fonction est correct
+- Consultez la liste des fonctions disponibles
+
+### 408 - Request Timeout
+**Cause :** La requête a pris trop de temps à s'exécuter.
+
+**Solution :**
+- Simplifiez votre requête si possible
+- Vérifiez la taille des données envoyées
+- Réessayez plus tard
+
+### 429 - Too Many Requests
+**Cause :** Limite de taux dépassée.
+
+**Solution :**
+- Attendez avant de faire de nouvelles requêtes
+- Implémentez une logique de retry avec backoff exponentiel
+- Considérez l'utilisation d'un plan avec des limites plus élevées
+
+### 500 - Internal Server Error
+**Cause :** Erreur interne du serveur.
+
+**Message en production :**
+```
+An unexpected error occurred. Please check your request and try again. If the issue persists, send an email to support@ikalas.com
+```
+
+**Solution :**
+- Vérifiez votre requête
+- Réessayez après quelques minutes
+- Contactez le support avec les détails de l'erreur
+
+
+## Support et assistance
+
+<Callout type="info">
+**Besoin d'aide ?** Si vous rencontrez des erreurs persistantes, contactez notre équipe de support :
+- Email : [contact@ikalas.com](mailto:support@ikalas.com)
+- Documentation : Consultez cette documentation
+- Discord : Rejoignez notre communauté
+</Callout>
+
+### Informations à fournir lors d'un signalement d'erreur
+
+Pour nous aider à résoudre votre problème rapidement, incluez :
+- Le code d'erreur HTTP
+- Le message d'erreur complet
+- L'endpoint appelé
+- Les paramètres de votre requête (sans données sensibles)
+- La date de l'erreur
