@@ -1,0 +1,125 @@
+import { Callout } from "nextra/components";
+
+# Analyse de Documents Médicaux avec l'API Ikalas
+
+<Callout type="info">
+**Important** Bien que l'utilisation de l'IA est un véritable atout pour l'analyse et l'explication de documents médicaux, il faut garder à l'esprit que cet usage doit être bien réfléchi avant d'être appliqué en conditions rélles de soin.
+Cette API est fournie à titre d'aide, d'information ou de prototypage. Pour une implémentation réelle dans une approche de soin, veuillez nous conctacter.
+</Callout>
+
+
+## Vue d'ensemble
+
+L'API d'analyse de documents médicaux d'Ikalas permet aux professionnels de santé et aux individus de comprendre des documents médicaux complexes. Cette fonctionnalité analyse les rapports médicaux, études de recherche ou dossiers de santé téléchargés et fournit des insights concis et compréhensibles ainsi que des recommandations liées à la santé.
+
+## Fonctionnalités principales
+
+- **Analyse de documents** : PDF, PowerPoint, Word, TXT
+- **Insights médicaux** : Résumé des points médicaux clés
+- **Évaluation des risques** : Identification des risques de santé potentiels
+- **Recommandations pratiques** : Conseils basés sur les informations fournies
+- **Points d'attention** : Éléments nécessitant un suivi médical spécial
+
+## Endpoint API
+
+```
+POST https://ikalas.com/app/ask-document
+```
+
+
+
+
+
+## Paramètres de la requête
+
+| Paramètre | Type | Requis | Description |
+|-----------|------|--------|-------------|
+| `inputFiles` | File | Oui | Document médical à analyser (PDF, PPT, PPTX, DOC, DOCX) |
+| `prompt` | String | Non | Question spécifique ou instruction d'analyse |
+
+## Exemple de prompt
+```
+Veuillez analyser ce document médical et fournir : 
+1. Un résumé des points médicaux clés ; 
+2. Une évaluation des risques potentiels pour la santé ; 
+3. Des recommandations pratiques basées sur les informations fournies ; 
+4. Les points nécessitant une attention particulière ou un suivi médical. Présentez les informations de manière structurée et professionnelle, en utilisant la terminologie médicale appropriée tout en restant accessible.
+```
+
+## Exemple de requête
+
+### Requête cURL
+
+```bash
+curl -F 'file=@"filePath","prompt": ""'\
+  -X POST "https://ikalas.com/api/v1/ask-document"\
+  -H "accept: application/json"\
+  -H "apikey: EICZM-DNP0-7NSN-YFQF"
+```
+
+
+### Requête JavaScript
+
+
+  ```javascript
+    const axios = require('axios');
+    const FormData = require('form-data');
+    const fs = require('fs');
+
+    let data = new FormData();
+    data.append('file', fs.createReadStream('/Users/ikalas/samples/test-medical-report.pdf'));
+    data.append('prompt', 'Analyser ce rapport médical et fournissez un résumé des points clés et des recommandations');
+
+    let config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: 'https://ikalas.com/api/v1/ask-document',
+      headers: {
+        'accept': 'application/json',
+        'apikey': 'VOTRE_CLE_API_ICI',
+        ...data.getHeaders()
+      },
+      data : data
+    };
+
+    axios.request(config)
+    .then((response) => {
+      console.log(JSON.stringify(response.data));
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+    ```
+
+
+
+## Exemple de réponse
+
+```json
+{
+  "success": true,
+  "id": "wor-700b29048f",
+  "date": "2025-08-11T10:11:58+00:00",
+  "typeOutput": "markup",
+  "result": "VOTRE RÉSULTAT S'AFFICHE ICI",
+  "__meta": {},
+  "creditsUser": 23,
+  "uuidLogFunction": "b0f066e6-aa5d-4a5e-9c6f-e0e53ec133fa",
+  "ika_conversationId": "98ddc758-70e6-48bf-9310-c30a9231d88e"
+}
+```
+
+## Cas d'usage
+
+### 1. Intégration dans un système EMR/HMIS
+
+### 2. Support décisionnel clinique
+
+### 3. Analyse de multiples documents
+
+
+## Support et contact
+
+Pour toute question technique ou support :
+- Formulaire de contact : https://ikalas.com/fr/app/contact
+- Dashboard : https://dashboard.ikalas.com/_api
