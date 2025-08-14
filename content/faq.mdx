@@ -1,0 +1,280 @@
+import { Tabs } from "nextra/components";
+import { Callout } from "nextra/components";
+import { Steps } from "nextra/components";
+
+# FAQ - Questions fréquemment posées
+
+Bienvenue dans la FAQ de l'API Ikalas. Vous trouverez ici les réponses aux questions les plus courantes concernant l'utilisation de notre API.
+
+## Général
+
+### Qu'est-ce que l'API Ikalas ?
+
+L'API Ikalas est une interface unifiée qui vous donne accès à des centaines de modèles d'intelligence artificielle via un seul point d'entrée. Elle simplifie l'intégration de l'IA dans vos applications en proposant une API standardisée.
+
+### Quels types de modèles d'IA sont disponibles ?
+
+Ikalas propose une large gamme de modèles d'IA :
+- **Modèles de langage** : GPT-4, Claude, Llama, Mistral, et bien d'autres
+- **Modèles de génération d'images** : DALL-E, Midjourney, Stable Diffusion
+- **Modèles d'analyse de documents** : Pour extraire et analyser du contenu
+- **Modèles spécialisés** : Pour des tâches spécifiques (traduction, résumé, etc.)
+
+### L'API Ikalas est-elle gratuite ?
+
+Ikalas propose plusieurs plans tarifaires :
+- **Plan gratuit** : Accès limité à certains modèles
+- **Plans payants** : Accès étendu avec plus de requêtes et de modèles premium
+
+## Authentification
+
+### Comment obtenir ma clé d'API ?
+
+<Steps>
+
+#### 1. Créez votre compte
+Rendez-vous sur [https://ikalas.com](https://ikalas.com) et créez votre compte.
+
+#### 2. Accédez au dashboard
+Connectez-vous sur [https://dashboard.ikalas.com](https://dashboard.ikalas.com)
+
+#### 3. Générez votre clé
+Allez dans la section API et cliquez sur "Nouveau" pour créer votre clé.
+
+</Steps>
+
+### Ma clé d'API a-t-elle une date d'expiration ?
+
+Par défaut, les clés d'API n'expirent pas. Cependant, vous pouvez définir une date d'expiration lors de la création de votre clé pour des raisons de sécurité.
+
+### Comment sécuriser ma clé d'API ?
+
+<Callout type="warning">
+**Important** : Ne partagez jamais votre clé d'API publiquement.
+</Callout>
+
+- Stockez-la dans des variables d'environnement
+- Utilisez des gestionnaires de secrets
+- Ne la committez jamais dans votre code source
+- Régénérez-la régulièrement si nécessaire
+
+## Utilisation de l'API
+
+### Comment faire ma première requête ?
+
+Voici un exemple simple en JavaScript :
+
+```javascript
+const axios = require("axios");
+
+const response = await axios.post("https://ikalas.com/api/v1/api-llm-ia", {
+  system: "You are a helpful assistant",
+  prompt: "Expliquez-moi l'intelligence artificielle en 3 phrases",
+  models: "meta-llama/llama-3.3-70b-instruct:free"
+}, {
+  headers: {
+    "apikey": "VOTRE_CLE_API_ICI",
+    "content-type": "application/json"
+  }
+});
+
+console.log(response.data);
+```
+
+### Quels sont les paramètres obligatoires ?
+
+Les paramètres obligatoires varient selon l'endpoint, mais généralement :
+- `apikey` : Votre clé d'API (dans les headers)
+- `prompt` : Votre question ou demande
+- `models` : Le modèle d'IA à utiliser
+
+### Comment choisir le bon modèle ?
+
+Le choix du modèle dépend de votre cas d'usage :
+- **Modèles gratuits** : Pour les tests et projets personnels
+- **Modèles premium** : Pour la production et les performances optimales
+- **Modèles spécialisés** : Pour des tâches spécifiques
+
+### Quels sont les formats de réponse supportés ?
+
+L'API Ikalas supporte plusieurs formats :
+- `default` : Réponse texte standard
+- `json` : Réponse structurée en JSON
+- `markdown` : Réponse formatée en Markdown
+
+## Limites et quotas
+
+### Quelles sont les limites de l'API ?
+
+Les limites dépendent de votre plan :
+- **Plan gratuit** : Limite de requêtes par minute/jour
+- **Plans payants** : Limites plus élevées selon le niveau
+
+### Comment vérifier mon quota restant ?
+
+Vous pouvez vérifier votre quota via le dashboard Ikalas ou en consultant les headers de réponse de l'API.
+
+### Que se passe-t-il si je dépasse mes limites ?
+
+Si vous dépassez vos limites :
+- Les requêtes peuvent être rejetées temporairement
+- Vous recevrez un message d'erreur 429 (Too Many Requests)
+- Attendez quelques minutes avant de réessayer
+
+## Gestion des erreurs
+
+### Quels sont les codes d'erreur courants ?
+
+| Code | Signification | Solution |
+|------|---------------|----------|
+| 400 | Requête malformée | Vérifiez les paramètres |
+| 401 | Clé API invalide | Vérifiez votre clé d'API |
+| 403 | Accès refusé | Vérifiez vos permissions |
+| 429 | Trop de requêtes | Attendez et réessayez |
+| 500 | Erreur serveur | Contactez le support |
+
+### Comment déboguer mes requêtes ?
+
+1. **Vérifiez les logs** : Consultez les détails de l'erreur
+2. **Testez avec curl** : Utilisez des outils de test simples
+3. **Vérifiez la documentation** : Consultez les exemples
+4. **Contactez le support** : Si le problème persiste
+
+## Intégration
+
+### Quels langages de programmation sont supportés ?
+
+L'API Ikalas est RESTful et peut être utilisée avec n'importe quel langage :
+- JavaScript/Node.js
+- Python
+- PHP
+- Java
+- C#
+- Et bien d'autres
+
+### Y a-t-il des SDK officiels ?
+
+Ikalas propose des SDK pour les langages les plus populaires. Consultez notre [section SDK](https://fr.docs.ikalas.com/sdk) pour plus d'informations.
+
+### Comment intégrer l'API dans mon application web ?
+
+```javascript
+// Exemple d'intégration côté client
+async function callIkalasAPI(prompt) {
+  try {
+    const response = await fetch('/api/ikalas', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ prompt })
+    });
+    
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Erreur:', error);
+  }
+}
+```
+
+## Support et assistance
+
+### Comment obtenir de l'aide ?
+
+Plusieurs options s'offrent à vous :
+- **Documentation** : Consultez cette documentation
+- **Support technique** : [contact@ikalas.com](mailto:contact@ikalas.com)
+- **Communauté** : Rejoignez notre communauté Discord
+- **Tickets** : Ouvrez un ticket via le dashboard
+
+### L'API est-elle disponible 24/7 ?
+
+Oui, l'API Ikalas est conçue pour être disponible 24h/24 et 7j/7. Nous maintenons un taux de disponibilité de 99.9%.
+
+### Y a-t-il des mises à jour planifiées ?
+
+Les mises à jour sont généralement annoncées à l'avance via :
+- Notre blog
+- Les notifications du dashboard
+- Notre newsletter
+
+## Facturation
+
+### Comment fonctionne la facturation ?
+
+La facturation se fait généralement :
+- **À l'usage** : Payez uniquement ce que vous utilisez
+- **Par plan** : Forfaits mensuels avec quotas inclus
+- **Sur devis** : Pour les gros volumes
+
+### Puis-je annuler mon abonnement ?
+
+Oui, vous pouvez annuler votre abonnement à tout moment via le dashboard. Vous garderez l'accès jusqu'à la fin de la période facturée.
+
+### Y a-t-il des remboursements ?
+
+Les politiques de remboursement dépendent de votre plan. Contactez notre équipe commerciale pour plus d'informations.
+
+## Sécurité et confidentialité
+
+### Mes données sont-elles sécurisées ?
+
+<Callout type="info">
+Ikalas prend la sécurité très au sérieux et respecte les standards de l'industrie.
+</Callout>
+
+- Chiffrement en transit (HTTPS/TLS)
+- Chiffrement au repos
+- Conformité RGPD
+- Audits de sécurité réguliers
+
+### L'API stocke-t-elle mes requêtes ?
+
+Nous stockons les requêtes pour :
+- Améliorer nos services
+- Détecter les abus
+- Fournir le support technique
+
+Vous pouvez demander la suppression de vos données via le dashboard.
+
+### Puis-je utiliser l'API en production ?
+
+Oui, l'API Ikalas est conçue pour la production avec :
+- Haute disponibilité
+- Monitoring 24/7
+- Support technique dédié
+- SLA garantis
+
+## Questions techniques avancées
+
+### Comment optimiser mes requêtes ?
+
+- Utilisez des prompts clairs et concis
+- Choisissez le bon modèle pour votre cas d'usage
+- Implémentez la mise en cache quand c'est possible
+- Surveillez vos quotas et limites
+
+### Puis-je faire des requêtes en lot ?
+
+Oui, l'API supporte les requêtes en lot pour améliorer les performances. Consultez notre documentation sur les requêtes en lot.
+
+### Comment gérer les timeouts ?
+
+```javascript
+// Exemple avec timeout
+const response = await axios.post(url, data, {
+  headers: headers,
+  timeout: 30000 // 30 secondes
+});
+```
+
+### L'API supporte-t-elle le streaming ?
+
+Oui, certains modèles supportent le streaming pour les réponses longues. Consultez notre documentation sur le streaming.
+
+---
+
+<Callout type="info">
+**Besoin d'aide supplémentaire ?** N'hésitez pas à nous contacter à [contact@ikalas.com](mailto:contact@ikalas.com) ou à consulter notre [documentation complète](https://fr.docs.ikalas.com).
+</Callout>
