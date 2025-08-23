@@ -23,7 +23,7 @@ L'API d'analyse de documents médicaux d'Ikalas permet aux professionnels de san
 ## Endpoint API
 
 ```
-POST https://ikalas.com/app/ask-document
+POST https://ikalas.com/api/v1/analyse-documents-medicaux-ia
 ```
 
 
@@ -52,7 +52,7 @@ Veuillez analyser ce document médical et fournir :
 
 ```bash
 curl -F 'file=@"filePath","prompt": ""'\
-  -X POST "https://ikalas.com/api/v1/ask-document"\
+  -X POST "https://ikalas.com/api/v1/analyse-documents-medicaux-ia"\
   -H "accept: application/json"\
   -H "apikey: EICZM-DNP0-7NSN-YFQF"
 ```
@@ -73,7 +73,7 @@ curl -F 'file=@"filePath","prompt": ""'\
     let config = {
       method: 'post',
       maxBodyLength: Infinity,
-      url: 'https://ikalas.com/api/v1/ask-document',
+      url: 'https://ikalas.com/api/v1/analyse-documents-medicaux-ia',
       headers: {
         'accept': 'application/json',
         'apikey': 'VOTRE_CLE_API_ICI',
@@ -122,4 +122,4 @@ curl -F 'file=@"filePath","prompt": ""'\
 
 Pour toute question technique ou support :
 - Formulaire de contact : https://ikalas.com/fr/app/contact
-- Dashboard : https://dashboard.ikalas.com/_api
+- Dashboard : https://dashboard.ikalas.com/fr/_api
